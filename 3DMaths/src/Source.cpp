@@ -10,6 +10,11 @@ public:
 	
 	float length() const;
 	float sqrLength() const;
+
+	//Vector scaling by an given scalar number
+	Vector operator * (float number) const;
+	Vector operator / (float number) const;
+
 };
 
 class Point
@@ -50,6 +55,25 @@ float Vector::length() const
 float Vector::sqrLength() const
 {
 	return(x*x + y*y);
+}
+
+// Scaling the vector with a scalar number
+Vector Vector::operator * (float n) const
+{
+	Vector v;
+	v.x = x * n;
+	v.y = y * n;
+	return v;
+}
+
+
+// Scaling the vector with a scalar number
+Vector Vector::operator / (float n) const
+{
+	Vector v;
+	v.x = x / n;
+	v.y = y / n;
+	return v;
 }
 
 int main()
