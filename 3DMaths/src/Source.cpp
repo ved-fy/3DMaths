@@ -8,6 +8,8 @@ public :
 
 public:
 	
+	float length() const;
+	float sqrLength() const;
 };
 
 class Point
@@ -38,6 +40,17 @@ Vector operator - (Point p1, Point p2)
 	return v;
 }
 
+// Finding magnitude of a vector
+float Vector::length() const
+{
+	 return(sqrt(x*x + y*y));
+}
+
+// Finding length of 2 vectors for comparison
+float Vector::sqrLength() const
+{
+	return(x*x + y*y);
+}
 
 int main()
 {
