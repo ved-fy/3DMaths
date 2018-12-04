@@ -7,7 +7,18 @@ public :
 	float x, y;
 
 public:
-	
+	//Constructor
+	Vector()
+	{
+
+	}
+
+	Vector(float X, float Y)
+	{
+		x = X;
+		y = Y;
+	}
+
 	float length() const;
 	float sqrLength() const;
 
@@ -15,6 +26,10 @@ public:
 	Vector operator * (float number) const;
 	Vector operator / (float number) const;
 
+	Vector normalized() const;
+
+	Vector operator + (const Vector& v) const;
+	Vector operator - (const Vector& v) const;
 };
 
 class Point
@@ -76,18 +91,50 @@ Vector Vector::operator / (float n) const
 	return v;
 }
 
+//Normalizing a vector by dividing the vector with its magnitude
+Vector Vector::normalized() const
+{
+	Vector normalized;
+	normalized = (*this) / length();
+	return normalized;
+}
+
+//Adding 2 vectors
+Vector Vector ::operator+(const Vector& v) const
+{
+	Vector r;
+	r.x = x + v.x;
+	r.y = y + v.y;
+	return r;
+}
+
+//Substracting 2 vectors
+Vector Vector ::operator-(const Vector& v) const
+{
+	return Vector(x - v.x, y - v.y);
+}
+
+//Comparing the directions of 2 vectors to find a backstab;
+float dotProduct(const Vector& a, const Vector& b)
+{
+	return (a.x * b.x + a.y * b.y);
+}
+
 int main()
 {
-	Point p;
-	p.x = 1;
-	p.y = 1;
+	Vector r(0, 3);
+	Vector b(0, 2);
 
-	Vector v;
-	v.x = 2;
-	v.y = 2;
+	Vector rn = r.normalized();
+	Vector bn = b.normalized();
 
-	Point p1 = p + v;
+	if ((dotProduct(rn, bn)) < -0.5)
+	{
+		std::cout << " You got backstabed" << std::endl;
+	}
+	else
+		std::cout << "failed" << std::endl;
 
-	std::cout << "(" << p1.x << ", " << p1.y << ")" << std::endl;
+	//std::cout << "(" << p1.x << ", " << p1.y << ")" << std::endl;
 	std::cin.get();
 }
